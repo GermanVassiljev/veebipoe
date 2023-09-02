@@ -45,7 +45,7 @@ namespace veebipoe.Controllers
             return _context.Category.ToList();
         }
 
-        [HttpDelete("/kustuta2/{id}")]
+        [HttpDelete("/kustuta3/{id}")]
         public IActionResult Deletecategory2(int id)
         {
             var category = _context.Category.Find(id);
