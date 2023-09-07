@@ -13,6 +13,7 @@ namespace veebipoe.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+
         }
     }
 }
