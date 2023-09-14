@@ -30,14 +30,7 @@ namespace veebipoe.Controllers
             _context.Order.Add(order);
             _context.SaveChanges();
 
-            var person = _context.Person.Include(a => a.Orders).SingleOrDefault(a => a.Id == order.PersonId);
-
-            if (person == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(person.Orders);
+            return Ok(_context.Order);
         }
 
         [HttpDelete("{id}")]
@@ -87,7 +80,7 @@ namespace veebipoe.Controllers
             return Ok(_context.Order);
         }
 
-        [HttpGet("person/{personId}")]
+        [HttpGet("{personId}")]
         public ActionResult<List<Order>> GetOrdersForPerson(int personId)
         {
             var orders = _context.Order.Where(c => c.PersonId == personId).ToList();

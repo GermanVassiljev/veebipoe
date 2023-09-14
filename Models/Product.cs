@@ -9,6 +9,5 @@
         public bool Active { get; set; }
         public int Stock { get; set; }
         public int CategoryId { get; set; }
-        public ICollection<CartProduct>? CartProducts { get; set; }
     }
 }

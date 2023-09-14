@@ -30,20 +30,8 @@ namespace veebipoe.Controllers
             _context.CartProduct.Add(CartProduct);
             _context.SaveChanges();
 
-            var order = _context.Order.Include(a => a.CartProduct).SingleOrDefault(a => a.Id == CartProduct.OrderId);
 
-            var product = _context.Product.Include(a => a.CartProducts).SingleOrDefault(a => a.Id == CartProduct.ProductId);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-            else if (product == null)
-            {
-                return NotFound();
-            }
-
-            return Ok((order.CartProduct, product.CartProducts));
+            return Ok(_context.CartProduct);
         }
 
         [HttpDelete("{id}")]
@@ -92,7 +80,7 @@ namespace veebipoe.Controllers
             return Ok(_context.CartProduct);
         }
 
-        [HttpGet("order/{orderId}")]
+        [HttpGet("{orderId}")]
         public ActionResult<List<CartProduct>> GetCartProductsForOrder(int orderId)
         {
             var CartProducts = _context.CartProduct.Where(c => c.OrderId == orderId).ToList();
@@ -105,7 +93,7 @@ namespace veebipoe.Controllers
             return CartProducts;
         }
 
-        [HttpGet("product/{productId}")]
+        [HttpGet("{productId}")]
         public ActionResult<List<CartProduct>> GetCartProductsForProduct(int productId)
         {
             var CartProducts = _context.CartProduct.Where(c => c.ProductId == productId).ToList();

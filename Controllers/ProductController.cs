@@ -29,14 +29,7 @@ namespace veebipoe.Controllers
             _context.Product.Add(product);
             _context.SaveChanges();
 
-            var category = _context.Category.Include(a => a.Products).SingleOrDefault(a => a.Id == product.CategoryId);
-
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(category.Products);
+            return Ok(_context.Product);
         }
 
         [HttpDelete("{id}")]

@@ -90,5 +90,10 @@ namespace veebipoe.Controllers
 
             return Ok(_context.Category);
         }
+
+        private bool CategoryExists(int id)
+        {
+            return _context.Category.Any(c => c.Id == id);
+        }
     }
 }

@@ -43,8 +43,6 @@ namespace veebipoe.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("CartProduct");
                 });
 
@@ -86,8 +84,6 @@ namespace veebipoe.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
 
                     b.ToTable("Order");
                 });
@@ -162,8 +158,6 @@ namespace veebipoe.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Product");
                 });
 
@@ -174,50 +168,11 @@ namespace veebipoe.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("veebipoe.Models.Product", null)
-                        .WithMany("CartProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("veebipoe.Models.Order", b =>
-                {
-                    b.HasOne("veebipoe.Models.Person", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("veebipoe.Models.Product", b =>
-                {
-                    b.HasOne("veebipoe.Models.Category", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("veebipoe.Models.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("veebipoe.Models.Order", b =>
                 {
                     b.Navigation("CartProduct");
-                });
-
-            modelBuilder.Entity("veebipoe.Models.Person", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("veebipoe.Models.Product", b =>
-                {
-                    b.Navigation("CartProducts");
                 });
 #pragma warning restore 612, 618
         }
